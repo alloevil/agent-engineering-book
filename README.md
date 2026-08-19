@@ -71,4 +71,4 @@
 
 ## 许可证
 
-CC BY-SA 4.0
+本书内容采用 [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](LICENSE) 许可证发布。
