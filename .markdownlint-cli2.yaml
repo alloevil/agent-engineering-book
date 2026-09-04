@@ -1,0 +1,17 @@
+# Baseline: rules already violated across existing chapters are disabled so CI guards
+# against new problems without a repo-wide reformat. Re-enable after cleanup:
+# MD022 blank lines around headings, MD032 blank lines around lists,
+# MD040 fenced code language, MD036 emphasis used as heading.
+config:
+  default: true
+  MD013: false
+  MD033: false
+  MD041: false
+  MD022: false
+  MD032: false
+  MD040: false
+  MD036: false
+  MD024:
+    siblings_only: true
+ignores:
+  - node_modules

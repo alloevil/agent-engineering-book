@@ -49,7 +49,7 @@
 
 - [术语表](references/glossary.md)
 - [核心论文清单](references/papers.md)
-- [配套代码](code-examples/)
+- [配套代码](chapters/)（示例内嵌于各章）
 
 ## 适合谁
 
