@@ -1,10 +1,10 @@
 # 核心论文清单
 
-按章节组织，每章推荐 3-5 篇必读论文。
+按章节组织，各章推荐 2-3 篇必读论文（第 4 章、第 13 章暂无）。
 
 ## 第 1-2 章：Agent 基础与 Harness
 
-- [Google Agents 白皮书](https://services.google.com/fh/files/misc/agents_whitepaper.pdf) — Agent 基础概念
+- [Google Agents 白皮书](https://www.kaggle.com/whitepaper-agents) — Agent 基础概念
 - [A Survey of Self-Evolving Agents](https://arxiv.org/abs/2507.21046) — 自进化 Agent 综述（77 页，TMLR 2026）
 
 ## 第 3 章：核心模式
@@ -21,18 +21,18 @@
 
 ## 第 6 章：规划与决策
 
-- [SagaLLM: Context Management, Validation, and Transaction Guarantees for Multi-Agent LLM Planning](https://www.researchgate.net/publication/389855859) — 事务性规划
-- [Measuring AI Ability to Complete Long Tasks](https://arxiv.org/abs/2503.14499) — METR 任务长度指标
+- [SagaLLM: Context Management, Validation, and Transaction Guarantees for Multi-Agent LLM Planning](https://arxiv.org/abs/2503.11951) — 事务性规划
+- [Measuring AI Ability to Complete Long Software Tasks](https://arxiv.org/abs/2503.14499) — METR 任务长度指标
 
 ## 第 7 章：Context Engineering
 
-- [A Survey of Context Engineering for Large Language Models](https://arxiv.org/abs/2507.11556) — Context Engineering 综述
-- [Sleep-time Compute](https://arxiv.org/abs/2507.11556) — 离线计算
+- [A Survey of Context Engineering for Large Language Models](https://arxiv.org/abs/2507.13334) — Context Engineering 综述
+- [Sleep-time Compute](https://arxiv.org/abs/2504.13171) — 离线计算
 
 ## 第 8 章：记忆系统
 
 - [Memory in the Age of AI Agents](https://arxiv.org/abs/2512.13564) — Agent 记忆综述
-- [A Survey on Large Language Model based Autonomous Agents](https://arxiv.org/abs/2308.11432) — Agent 记忆架构
+- [A Survey on Large Language Model based Autonomous Agents](https://arxiv.org/abs/2308.11432) — LLM Agent 总论（记忆为其架构组件之一）
 
 ## 第 9 章：工具使用
 
@@ -57,5 +57,5 @@
 
 ## 第 14 章：应用前沿
 
-- [The Virtual Lab: AI agents design new SARS-CoV-2 nanobodies](https://www.nature.com/articles/s41586-025-09442-9) — 科学发现
+- [The Virtual Lab of AI agents designs new SARS-CoV-2 nanobodies](https://www.nature.com/articles/s41586-025-09442-9) — 科学发现
 - [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442) — Agent 社会

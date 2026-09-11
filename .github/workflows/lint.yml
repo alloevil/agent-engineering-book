@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 4 * * 1' # weekly link check
+    - cron: '0 4 * * 1' # weekly scheduled run (lint + links)
 permissions:
   contents: read
 jobs:
@@ -18,7 +18,6 @@ jobs:
         with:
           globs: |
             **/*.md
-            __omp_shell("node_modules")
   links:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -26,5 +25,5 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
-          args: --no-progress --accept 200,206,429 --exclude-path references --max-concurrency 8 './**/*.md'
+          args: --no-progress --accept 200,206,429 --max-concurrency 8 './**/*.md'
           fail: true

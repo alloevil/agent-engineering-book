@@ -190,8 +190,8 @@ L2 的 Workflow 在处理发票报销时比 L4 的 Agent 更可靠。选什么�
 ## 参考资料
 
 - Russell, S., & Norvig, P. (2020). *Artificial Intelligence: A Modern Approach* (4th ed.). Chapter 2: Intelligent Agents.
-- Google. (2024). *Agents* (Whitepaper).
-- MIT Sloan. (2025). *Agentic AI Explained: The Autonomous Frontier*.
+- Google. (2024). *Agents* (Whitepaper). <https://www.kaggle.com/whitepaper-agents>
+- MIT Sloan. (2026). *Agentic AI, explained*. <https://mitsloan.mit.edu/ideas-made-to-matter/agentic-ai-explained>
 
 ---
 
