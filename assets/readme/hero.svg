@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">Agent Engineering — Building Reliable AI Agents: From Reasoning to Production</title>
+  <desc id="heroDesc">书脊上写着书名的开源教材：14 章分为五部分——基础篇、推理与规划篇、核心工程篇、评估与安全篇、进化与部署篇。章节阶梯共 14 级，其中前 2 级（已成稿）为铜色，其余 12 级为大纲。</desc>
+
+  <rect width="1200" height="420" rx="20" fill="#F4EDE0"/>
+
+  <g id="book-spine">
+    <rect x="56" y="44" width="200" height="332" rx="10" fill="#7B2D26"/>
+    <rect x="56" y="44" width="8" height="332" rx="4" fill="#66241E"/>
+    <g id="spine-title" transform="translate(156 210) rotate(-90)" text-anchor="middle"
+       font-family="Georgia, 'Songti SC', 'Times New Roman', serif" font-size="32"
+       letter-spacing="2.5" fill="#F4EDE0">
+      <text x="0" y="-14">AGENT</text>
+      <text x="0" y="32">ENGINEERING</text>
+    </g>
+    <rect x="96" y="374" width="120" height="3" fill="#B9862F"/>
+  </g>
+
+  <g id="cover-copy">
+    <text x="352" y="84" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+          font-size="20" letter-spacing="2" fill="#6E6555">AI AGENT 工程 · 开源教材</text>
+    <text x="352" y="140" font-family="Georgia, 'Songti SC', 'Times New Roman', serif" font-size="32" fill="#241F19">Building Reliable AI Agents</text>
+    <text x="352" y="180" font-family="Georgia, 'Songti SC', 'Times New Roman', serif" font-size="32" fill="#241F19">From Reasoning to Production</text>
+  </g>
+
+  <g id="legend" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#6E6555">
+    <rect x="894" y="74" width="12" height="12" rx="2" fill="#B9862F"/>
+    <text x="914" y="85">已成稿 2 章</text>
+    <rect x="1038" y="74" width="12" height="12" rx="2" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+    <text x="1058" y="85">共 14 章</text>
+  </g>
+
+  <g id="chapter-ladder">
+    <rect x="351" y="201" width="2" height="168" fill="#241F19"/>
+    <rect x="559" y="201" width="2" height="168" fill="#241F19"/>
+    <g id="rungs">
+      <rect x="351" y="204" width="210" height="6" rx="3" fill="#B9862F"/>
+      <rect x="351" y="216" width="210" height="6" rx="3" fill="#B9862F"/>
+      <rect x="351" y="228" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="240" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="252" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="264" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="276" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="288" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="300" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="312" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="324" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="336" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="348" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+      <rect x="351" y="360" width="210" height="6" rx="3" fill="#E9E0CE" stroke="#241F19" stroke-width="2"/>
+    </g>
+    <g id="part-brackets" fill="#C9BDA5">
+      <rect x="575" y="203" width="2" height="48"/>
+      <rect x="575" y="251" width="2" height="24"/>
+      <rect x="575" y="275" width="2" height="36"/>
+      <rect x="575" y="311" width="2" height="24"/>
+      <rect x="575" y="335" width="2" height="36"/>
+    </g>
+    <g id="part-labels" font-size="22" fill="#241F19"
+       font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+      <text x="590" y="233" font-family="Georgia, 'Songti SC', serif" font-size="22" fill="#7B2D26">I</text>
+      <text x="620" y="233">基础篇</text>
+      <text x="590" y="269" font-family="Georgia, 'Songti SC', serif" font-size="22" fill="#7B2D26">II</text>
+      <text x="620" y="269">推理与规划篇</text>
+      <text x="590" y="299" font-family="Georgia, 'Songti SC', serif" font-size="22" fill="#7B2D26">III</text>
+      <text x="620" y="299">核心工程篇</text>
+      <text x="590" y="329" font-family="Georgia, 'Songti SC', serif" font-size="22" fill="#7B2D26">IV</text>
+      <text x="620" y="329">评估与安全篇</text>
+      <text x="590" y="359" font-family="Georgia, 'Songti SC', serif" font-size="22" fill="#7B2D26">V</text>
+      <text x="620" y="359">进化与部署篇</text>
+    </g>
+    <g id="part-refs" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#6E6555">
+      <text x="690" y="233">Foundations</text>
+      <text x="756" y="269">Reasoning &amp; Planning</text>
+      <text x="734" y="299">Core Engineering</text>
+      <text x="756" y="329">Evaluation &amp; Safety</text>
+      <text x="756" y="359">Evolution &amp; Deployment</text>
+      <text x="1152" y="233" text-anchor="end">第 1–4 章</text>
+      <text x="1152" y="269" text-anchor="end">第 5–6 章</text>
+      <text x="1152" y="299" text-anchor="end">第 7–9 章</text>
+      <text x="1152" y="329" text-anchor="end">第 10–11 章</text>
+      <text x="1152" y="359" text-anchor="end">第 12–14 章</text>
+    </g>
+  </g>
+
+  <g id="colophon" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#6E6555">
+    <text x="352" y="396">14 章 · 5 部分 · 术语表 · 核心论文清单 · CC BY-SA 4.0</text>
+  </g>
+</svg>

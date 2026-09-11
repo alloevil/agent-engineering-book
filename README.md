@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Agent Engineering — building reliable AI agents, from reasoning to production">
+</p>
+
 # Agent Engineering
 
 **Building Reliable AI Agents: From Reasoning to Production**
