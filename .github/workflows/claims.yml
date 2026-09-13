@@ -1,0 +1,19 @@
+name: claims
+# Runs the receipts behind claims.json: every published number must still be printed by the
+# command next to it. The checks are python3 + standard library over the committed
+# Markdown/SVG, so this job installs nothing. Weekly as well as on push, because the
+# numbers move when a chapter is written, not only when someone remembers to look.
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: published numbers still reproduce
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: alloevil/verify-claims@v0.1.1

@@ -1,0 +1,174 @@
+{
+  "$comment": "Receipts for every number this book repository publishes in prose: the 14 chapter files, the README's status column and five-part 目录, the hero figure's legend and ladder, and the papers list's per-chapter coverage. Each check re-derives the figure from the committed Markdown/SVG with python3 (standard library only, offline); none of them echoes a constant that is also written here.",
+  "project": "agent-engineering-book",
+  "repository": "https://github.com/alloevil/agent-engineering-book",
+  "updated": "2026-09-13",
+  "claims": [
+    {
+      "id": "chapter-file-count",
+      "claim": "The book is planned as 14 chapters, one committed file per chapter.",
+      "value": "14",
+      "metric": "files matching chapters/*.md",
+      "method": "glob over the committed chapters/ directory; no index file can disagree with the filesystem",
+      "repro": "ls chapters/*.md | wc -l",
+      "evidence": "chapters/*.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import glob;print(\"chapters\",len(glob.glob(\"chapters/*.md\")))'",
+        "expect": {
+          "equals": "chapters 14"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "readme-status-column-matches-files",
+      "claim": "The README's status column (✅ written / 🚧 outline) agrees with what the chapter files actually contain: a file still ending in `*本章待展开。*` is an outline, a file without that line is written.",
+      "value": "14 rows: 2 ✅ / 12 🚧, 0 mismatches",
+      "metric": "each README chapter row's status marker compared with the presence of the `本章待展开` line in the file it links to",
+      "method": "parse the README table rows, then for every row require marker ✅ ⟺ the linked chapters/*.md does not contain 本章待展开",
+      "repro": "grep -L 本章待展开 chapters/*.md  # the two that come back are the ✅ rows",
+      "evidence": "README.md (目录 tables) + chapters/*.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io;T=\"\".join(map(chr,[0x672c,0x7ae0,0x5f85,0x5c55,0x5f00]));D=chr(0x2705);rows=[(l.split(\"](\")[1].split(\")\")[0],l.rstrip().split(\"|\")[-2].strip()) for l in io.open(\"README.md\",encoding=\"utf-8\").read().splitlines() if l.startswith(\"| [\") and \"](\" in l and l.count(\"|\")>=4];rows=[r for r in rows if r[0].startswith(\"chapters/\")];w=sum(1 for p,s in rows if s==D);bad=sum(1 for p,s in rows if ((T in io.open(p,encoding=\"utf-8\").read())!=(s!=D)));print(\"rows\",len(rows),\"written\",w,\"outline\",len(rows)-w,\"mismatched\",bad)'",
+        "expect": {
+          "equals": "rows 14 written 2 outline 12 mismatched 0"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "hero-legend-counts-match-the-files",
+      "claim": "The hero figure's legend ('已成稿 2 章' / '共 14 章') and its ladder (14 rungs, the first 2 bronze, the rest outline) count the same chapters the repository ships.",
+      "value": "ladder 14 rungs (2 bronze + 12 outline), legend [2, 14], files 14, written 2",
+      "metric": "rungs in the hero SVG's `rungs` group by fill colour, legend numbers read from the SVG's own legend text, written/total re-derived from chapters/*.md",
+      "method": "count <rect> in assets/readme/hero.svg's `rungs` group by fill (#B9862F written, #E9E0CE outline), read the two legend numbers, and re-derive the same two counts from chapters/*.md",
+      "repro": "grep -c '<rect' <(sed -n '/id=\\\"rungs\\\"/,/</g>/p' assets/readme/hero.svg)",
+      "evidence": "assets/readme/hero.svg (legend + chapter-ladder) + chapters/*.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,glob,re;T=\"\".join(map(chr,[0x672c,0x7ae0,0x5f85,0x5c55,0x5f00]));f=sorted(glob.glob(\"chapters/*.md\"));w=sum(1 for p in f if T not in io.open(p,encoding=\"utf-8\").read());h=io.open(\"assets/readme/hero.svg\",encoding=\"utf-8\").read();r=h.split(\"id=\\\"rungs\\\"\")[1].split(\"</g>\")[0];leg=re.findall(\"<text[^>]*>([^<]*)</text>\",h.split(\"id=\\\"legend\\\"\")[1].split(\"</g>\")[0]);n=[int(re.findall(\"[0-9]+\",t)[0]) for t in leg];print(\"rungs\",r.count(\"<rect\"),\"bronze\",r.count(\"#B9862F\"),\"outline\",r.count(\"#E9E0CE\"),\"legend\",n,\"files\",len(f),\"written\",w)'",
+        "expect": {
+          "equals": "rungs 14 bronze 2 outline 12 legend [2, 14] files 14 written 2"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "papers-list-covers-chapters-2-to-3-each",
+      "claim": "`references/papers.md` is organised by chapter, recommends 2–3 must-read papers per chapter section, and has no section for chapter 4 or chapter 13 (the file says so in its opening line).",
+      "value": "11 sections / 25 papers / 2–3 per section / every chapter except 4 and 13 has a section (12 of 14)",
+      "metric": "sections (`##` headings) and their bullet links in references/papers.md; chapter numbers parsed out of each section heading",
+      "method": "split the file on `## ` headings, count `- [` bullets per section, union the chapter numbers named in the headings, and list chapters 1–14 with no section",
+      "repro": "grep -n '^## ' references/papers.md && grep -c '^- \\[' references/papers.md",
+      "evidence": "references/papers.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,re;p=io.open(\"references/papers.md\",encoding=\"utf-8\").read();sec=re.split(r\"^## \",p,flags=re.M)[1:];cnt=[len(re.findall(r\"^- \\[\",s,re.M)) for s in sec];cov=sorted({int(n) for s in sec for n in re.findall(\"[0-9]+\",s.split(chr(10))[0])});print(\"sections\",len(sec),\"papers\",sum(cnt),\"per-section\",min(cnt),max(cnt),\"chapters-covered\",len(cov),\"no-section\",[c for c in range(1,15) if c not in cov])'",
+        "expect": {
+          "equals": "sections 11 papers 25 per-section 2 3 chapters-covered 12 no-section [4, 13]"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "summary-lists-every-chapter-and-its-links-resolve",
+      "claim": "`SUMMARY.md` lists all 14 chapters plus the two appendix files, and every relative link in `SUMMARY.md` and `README.md` points at a file that exists in the checkout.",
+      "value": "17 links in SUMMARY.md, 14 of them chapters, 0 missing, 0 chapter files unlisted",
+      "metric": "relative links extracted from SUMMARY.md and README.md and resolved against the working tree; chapters/*.md not referenced by SUMMARY.md counted",
+      "method": "pull `](...)` targets out of SUMMARY.md and README.md, stat each relative one, and diff the SUMMARY chapter links against chapters/*.md",
+      "repro": "grep -o ']([^)]*)' SUMMARY.md",
+      "evidence": "SUMMARY.md + README.md + chapters/*.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,re,glob,os;L=lambda f: re.findall(r\"\\]\\(([^)]+)\\)\",io.open(f,encoding=\"utf-8\").read());s=L(\"SUMMARY.md\");all_=s+L(\"README.md\");loc=[l for l in all_ if not l.startswith(\"http\") and not l.startswith(\"#\")];miss=sorted({l for l in loc if not os.path.exists(l.split(\"#\")[0])});ch=[l for l in s if l.startswith(\"chapters/\")];files=sorted(glob.glob(\"chapters/*.md\"));print(\"summary-links\",len(s),\"summary-chapters\",len(ch),\"missing\",len(miss),\"files-not-listed\",len([f for f in files if f not in ch]))'",
+        "expect": {
+          "equals": "summary-links 17 summary-chapters 14 missing 0 files-not-listed 0"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "readme-five-parts-cover-14-chapters",
+      "claim": "The README blurb — 已规划五部分共 14 章 — and its 目录 split the book into five parts holding 4+2+3+2+3 chapters, one row per chapter file (the written/outline split in the same blurb is receipted by readme-status-column-matches-files).",
+      "value": "5 parts, 4/2/3/2/3 chapters, total 14",
+      "metric": "`###` part headings in README.md and the chapter rows under each",
+      "method": "split README.md on `###` headings, keep the five that name a 部分, count their `| [第` rows",
+      "repro": "grep -n '^### ' README.md",
+      "evidence": "README.md (目录 part headings)",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,re;r=io.open(\"README.md\",encoding=\"utf-8\").read();P=\"\".join(map(chr,[0x90e8,0x5206]));b=[x for x in re.split(r\"^### \",r,flags=re.M)[1:] if P in x.split(chr(10))[0]];c=[len(re.findall(r\"^\\| \\[\",x,re.M)) for x in b];print(\"parts\",len(b),\"chapters-per-part\",c,\"total\",sum(c))'",
+        "expect": {
+          "equals": "parts 5 chapters-per-part [4, 2, 3, 2, 3] total 14"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "exercises-exist-in-both-written-chapters",
+      "claim": "The README's 如何使用 step 2 — 第 1-2 章末尾有思考题，其余章节待补 — is what the files show: exactly the two written chapters have a 思考题 section.",
+      "value": "2 chapters with a 思考题 section, none of them an outline",
+      "metric": "files under chapters/ containing an `## 思考题` heading",
+      "method": "scan chapters/*.md for the `## 思考题` heading and list the files that have it",
+      "repro": "grep -ln '^## 思考题' chapters/*.md",
+      "evidence": "chapters/ch01-what-is-agent.md + chapters/ch02-harness.md (README 如何使用 step 2)",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,glob;Q=\"\".join(map(chr,[0x601d,0x8003,0x9898]));f=sorted(glob.glob(\"chapters/*.md\"));h=[p.split(\"/\")[-1] for p in f if (\"## \"+Q) in io.open(p,encoding=\"utf-8\").read()];print(\"exercises\",len(h),\" \".join(h))'",
+        "expect": {
+          "equals": "exercises 2 ch01-what-is-agent.md ch02-harness.md"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "code-samples-appear-only-in-chapter-1",
+      "claim": "The README says the book's code samples live in chapter 1 only (附录 配套示例 links chapter 1 alone): chapter 1 is the one chapter carrying language-tagged fenced code; chapter 2's fences are unlabelled ASCII diagrams, not samples.",
+      "value": "1 chapter with a language-tagged code fence — ch01-what-is-agent.md",
+      "metric": "chapters/*.md containing at least one ``` fence opened with a language tag (```python, ```bash, …); unlabelled fences (ASCII diagrams) do not count",
+      "method": "regex each chapter for a fence line that opens with a language name",
+      "repro": "grep -ln '^```[A-Za-z]' chapters/*.md",
+      "evidence": "chapters/ch01-what-is-agent.md:98,107 + README 附录",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,glob,re;f=sorted(glob.glob(\"chapters/*.md\"));h=[p.split(\"/\")[-1] for p in f if re.search(r\"^```[A-Za-z]\",io.open(p,encoding=\"utf-8\").read(),re.M)];print(\"code-samples\",len(h),\" \".join(h))'",
+        "expect": {
+          "equals": "code-samples 1 ch01-what-is-agent.md"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "hero-part-ladder-spans-chapters-1-to-14",
+      "claim": "The hero figure numbers its five part brackets I–V as 第 1–4 / 5–6 / 7–9 / 10–11 / 12–14 章 — the same 4+2+3+2+3 split as the README's five parts, covering chapters 1–14 with no gap — and its colophon reads 14 章 · 5 部分.",
+      "value": "5 part labels, ranges [(1,4),(5,6),(7,9),(10,11),(12,14)], contiguous, colophon [14, 5]",
+      "metric": "the `part-labels` group and the `part-refs` chapter ranges plus the colophon line of assets/readme/hero.svg",
+      "method": "read the five `第 a–b 章` ranges out of the hero SVG, expand them and require exactly 1..14; count the part labels and the colophon's own figures",
+      "repro": "grep -n '章</text>\\|部分' assets/readme/hero.svg",
+      "evidence": "assets/readme/hero.svg (part-labels, part-refs, colophon)",
+      "as_of": "2026-09-13",
+      "check": {
+        "cmd": "python3 -c 'import io,re;C=lambda *c:\"\".join(map(chr,c));h=io.open(\"assets/readme/hero.svg\",encoding=\"utf-8\").read();refs=[(int(a),int(b)) for a,b in re.findall(C(0x7b2c)+r\" ([0-9]+)\"+C(0x2013)+r\"([0-9]+) \"+C(0x7ae0),h)];lab=h.split(\"id=\\\"part-labels\\\"\")[1].split(\"</g>\")[0];col=re.findall(\"<text[^>]*>([^<]*)</text>\",h.split(\"id=\\\"colophon\\\"\")[1])[0];seq=[i for a,b in refs for i in range(a,b+1)];print(\"part-labels\",len(re.findall(\">[IVX]+</text>\",lab)),\"ranges\",refs,\"sizes\",[b-a+1 for a,b in refs],\"covers\",len(seq),\"contiguous\",seq==list(range(1,15)),\"colophon\",[int(x) for x in re.findall(\"[0-9]+\",col)][:2])'",
+        "expect": {
+          "equals": "part-labels 5 ranges [(1, 4), (5, 6), (7, 9), (10, 11), (12, 14)] sizes [4, 2, 3, 2, 3] covers 14 contiguous True colophon [14, 5]"
+        },
+        "timeout": 60
+      }
+    },
+    {
+      "id": "paper-list-citations-are-live",
+      "claim": "Every paper the list recommends is real and still reachable at the URL given (25 links; the list's own prose cites them as the sources behind the chapters).",
+      "value": "25 links, all live",
+      "metric": "HTTP status of the 25 outbound links in references/papers.md",
+      "method": "fetching them needs network access, which no check in this file may do",
+      "repro": "curl -sI https://arxiv.org/abs/2210.03629 | head -1",
+      "evidence": "references/papers.md",
+      "as_of": "2026-09-13",
+      "check": {
+        "manual": "Needs network: reachability is an HTTP request to arxiv.org, nature.com, kaggle.com and rdi.berkeley.edu, and the claims job is deliberately offline so a dead link cannot take down the number gate. Reachability is covered by the lychee step in .github/workflows/lint.yml (references/ was added to its scope on 2026-09-12, 68 links / 0 errors). Whether each paper is the *right* recommendation for its chapter is a reading judgement no command makes."
+      }
+    }
+  ]
+}
