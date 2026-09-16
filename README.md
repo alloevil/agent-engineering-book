@@ -75,9 +75,7 @@
 3. 代码示例目前仅见第 1 章正文（其余章节待补）
 4. 参考论文在 `references/papers.md`
 
-<p align="center">
-  <a href="https://github.com/oil-oil/beautify-github-readme"><img src="./assets/readme/made-with-beautify.svg" width="300" alt="README made with beautify-github-readme"></a>
-</p>
+
 
 ## 许可证
 
