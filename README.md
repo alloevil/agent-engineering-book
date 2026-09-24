@@ -15,7 +15,7 @@
 ### 第一部分：基础篇
 
 | 章节 | 主题 | 状态 |
-|------|------|------|
+| --- | --- | --- |
 | [第 1 章](chapters/ch01-what-is-agent.md) | Agent 是什么 | ✅ |
 | [第 2 章](chapters/ch02-harness.md) | Harness——Agent 的缰绳 | ✅ |
 | [第 3 章](chapters/ch03-core-patterns.md) | Agent 核心模式 | 🚧 |
@@ -24,14 +24,14 @@
 ### 第二部分：推理与规划篇
 
 | 章节 | 主题 | 状态 |
-|------|------|------|
+| --- | --- | --- |
 | [第 5 章](chapters/ch05-reasoning.md) | 推理能力 | 🚧 |
 | [第 6 章](chapters/ch06-planning.md) | 规划与决策 | 🚧 |
 
 ### 第三部分：核心工程篇
 
 | 章节 | 主题 | 状态 |
-|------|------|------|
+| --- | --- | --- |
 | [第 7 章](chapters/ch07-context-engineering.md) | Context Engineering | 🚧 |
 | [第 8 章](chapters/ch08-memory.md) | 记忆系统 | 🚧 |
 | [第 9 章](chapters/ch09-tools.md) | 工具使用与环境交互 | 🚧 |
@@ -39,14 +39,14 @@
 ### 第四部分：评估与安全篇
 
 | 章节 | 主题 | 状态 |
-|------|------|------|
+| --- | --- | --- |
 | [第 10 章](chapters/ch10-evaluation.md) | Agent 评估 | 🚧 |
 | [第 11 章](chapters/ch11-safety.md) | 安全与对齐 | 🚧 |
 
 ### 第五部分：进化与部署篇
 
 | 章节 | 主题 | 状态 |
-|------|------|------|
+| --- | --- | --- |
 | [第 12 章](chapters/ch12-self-evolving.md) | Agent 自进化 | 🚧 |
 | [第 13 章](chapters/ch13-production.md) | 生产部署 | 🚧 |
 | [第 14 章](chapters/ch14-frontiers.md) | Agent 应用前沿 | 🚧 |
@@ -74,8 +74,6 @@
 2. 第 1-2 章末尾有思考题，建议动手实践（其余章节待补）
 3. 代码示例目前仅见第 1 章正文（其余章节待补）
 4. 参考论文在 `references/papers.md`
-
-
 
 ## 许可证
 
